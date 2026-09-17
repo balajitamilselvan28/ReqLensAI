@@ -1,0 +1,74 @@
+{
+  "requirements": [
+    {
+      "requirement_id": "REQ-001",
+      "original_text": "Students shall be allowed to register for university events."
+    },
+    {
+      "requirement_id": "REQ-002",
+      "original_text": "Only administrators shall be allowed to register students for university events."
+    },
+    {
+      "requirement_id": "REQ-003",
+      "original_text": "The system shall respond within 300 milliseconds."
+    },
+    {
+      "requirement_id": "REQ-004",
+      "original_text": "The system shall respond within 500 milliseconds under normal operating conditions."
+    },
+    {
+      "requirement_id": "REQ-005",
+      "original_text": "Students shall cancel their own event registrations."
+    },
+    {
+      "requirement_id": "REQ-006",
+      "original_text": "Only administrators shall cancel event registrations."
+    },
+    {
+      "requirement_id": "REQ-007",
+      "original_text": "Users shall log in using institutional Google accounts."
+    },
+    {
+      "requirement_id": "REQ-008",
+      "original_text": "The system shall support login using institutional Google accounts."
+    }
+  ],
+  "relationships": [
+    {
+      "requirement_id_1": "REQ-001",
+      "requirement_id_2": "REQ-002",
+      "relationship_type": "contradiction",
+      "contradiction_type": "permission_conflict"
+    },
+    {
+      "requirement_id_1": "REQ-005",
+      "requirement_id_2": "REQ-006",
+      "relationship_type": "contradiction",
+      "contradiction_type": "permission_conflict"
+    },
+    {
+      "requirement_id_1": "REQ-003",
+      "requirement_id_2": "REQ-004",
+      "relationship_type": "candidate_conflict",
+      "contradiction_type": null
+    },
+    {
+      "requirement_id_1": "REQ-007",
+      "requirement_id_2": "REQ-008",
+      "relationship_type": "redundancy",
+      "contradiction_type": null
+    },
+    {
+      "requirement_id_1": "REQ-001",
+      "requirement_id_2": "REQ-007",
+      "relationship_type": "dependency",
+      "contradiction_type": null
+    },
+    {
+      "requirement_id_1": "REQ-002",
+      "requirement_id_2": "REQ-007",
+      "relationship_type": "unrelated",
+      "contradiction_type": null
+    }
+  ]
+}

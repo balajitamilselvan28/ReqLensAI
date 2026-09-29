@@ -4,6 +4,25 @@ from src.schemas.data_models import Requirement, ReasoningResult, CandidatePair
 
 logger = logging.getLogger(__name__)
 
+# Modal verbs Gemini may prepend to the action field
+_MODAL_VERBS = {"shall", "must", "should", "will", "may", "can", "would", "could"}
+
+
+def _normalize_action(action: str) -> str:
+    """
+    Strip leading modal verbs from an action string so that
+    'shall register' and 'register' compare as equal.
+    This handles the case where Gemini inconsistently includes modals.
+    """
+    if not action:
+        return action
+    words = action.lower().split()
+    # Strip all leading modal verbs
+    while words and words[0] in _MODAL_VERBS:
+        words.pop(0)
+    return " ".join(words)
+
+
 class LogicalReasoningAgent:
     """
     Evaluates candidate pairs of requirements to infer logical relationships
@@ -30,10 +49,11 @@ class LogicalReasoningAgent:
         
         details = []
         
-        # 1. Action Overlap
-        action_match = False
-        if req1.action and req2.action and req1.action.lower() == req2.action.lower():
-            action_match = True
+        # 1. Action Overlap — normalize to remove modal verbs before comparison
+        action1_norm = _normalize_action(req1.action) if req1.action else ""
+        action2_norm = _normalize_action(req2.action) if req2.action else ""
+
+        action_match = bool(action1_norm and action2_norm and action1_norm == action2_norm)
                 
         # Object Overlap
         object_match = False

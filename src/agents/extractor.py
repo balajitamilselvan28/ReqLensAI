@@ -80,7 +80,7 @@ class RequirementExtractionAgent:
         """
         self.llm = llm
         self.prompt = ChatPromptTemplate.from_messages([
-            ("system", EXTRACTION_PROMPT)
+            ("human", EXTRACTION_PROMPT)
         ])
         self.structured_llm = self.llm.with_structured_output(ExtractedRequirements)
 
